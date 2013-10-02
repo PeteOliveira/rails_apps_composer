@@ -76,7 +76,7 @@ end
 ## Email
 if recipes.include? 'email'
   prefs[:email] = multiple_choice "Add support for sending email?", [["None", "none"], ["Gmail","gmail"], ["SMTP","smtp"],
-    ["SendGrid","sendgrid"], ["Mandrill","mandrill"]] unless prefs.has_key? :email
+    ["SendGrid","sendgrid"], ["Mandrill","mandrill"], ["Mailcatcher","mailcatcher"]] unless prefs.has_key? :email
 else
   prefs[:email] = 'none'
 end

@@ -94,6 +94,16 @@ TEXT
     inject_into_file 'config/environments/development.rb', mandrill_configuration_text, :after => "config.assets.debug = true"
     inject_into_file 'config/environments/production.rb', mandrill_configuration_text, :after => "config.active_support.deprecation = :notify"
   end
+    ### MAILCATCHER
+  if prefer :email, 'mailcatcher'
+    mailcatcher_configuration_text = <<-TEXT
+  \n
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    config.action_mailer.smtp_settings = { :host => "localhost", :port => 1025 }
+    config.action_mailer.delivery_method = :smtp
+  TEXT
+    inject_into_file 'config/environments/development.rb', mailcatcher_configuration_text, :after => "config.assets.debug = true"
+  end
   ### GIT
   git :add => '-A' if prefer :git, true
   git :commit => '-qm "rails_apps_composer: set email accounts"' if prefer :git, true
